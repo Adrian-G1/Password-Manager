@@ -1,4 +1,5 @@
 from random import choice, randint, shuffle
+# import pyperclip
 
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
            'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
@@ -11,8 +12,6 @@ def generate_password() -> str:
     nr_letters = randint(8, 10)
     nr_numbers = randint(2, 4)
     nr_symbols = randint(2, 4)
-
-    password = ""
 
     password_letters = [choice(letters) for _ in range(nr_letters)]
     # for char in range(nr_letters):
@@ -32,5 +31,7 @@ def generate_password() -> str:
     password = "".join(password_list)
     # for char in password_list:
     #     password += char
+
+    # pyperclip.copy()
 
     return password
