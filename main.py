@@ -1,8 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
+from generator import generate_password
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+def random_password():
+    password = generate_password()
+    password_entry.delete(0, tk.END)
+    password_entry.insert(0, password)
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -59,7 +64,7 @@ password_entry = tk.Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Buttons
-generate_button = tk.Button(text="Generate Password")
+generate_button = tk.Button(text="Generate Password", command=random_password)
 generate_button.grid(row=3, column=2)
 
 add_button = tk.Button(text="Add", width=36, command=add_password)
