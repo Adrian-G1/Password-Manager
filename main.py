@@ -4,7 +4,28 @@ from tkinter import messagebox
 from generator import generate_password
 
 
-# ---------------------------- PASSWORD GENERATOR ------------------------------- #
+# ---------------------------- SEARCH PASSWORD --------------------------------- #
+def search_password():
+    website = website_entry.get().title()
+
+    if len(website):
+        try:
+            with open("data.json", "r") as file:
+                data = js.load(file)
+        except FileNotFoundError:
+            messagebox.showerror(title="Error", message="No Data File Found!")
+        else:
+            if website in data:
+                email = data[website]["email"]
+                password = data[website]["password"]
+                messagebox.showinfo(title=f"{website}", message=f"Email: {email}\nPassword: {password}")
+            else:
+                messagebox.showerror(title="Error", message="Website Not Found!")
+    else:
+        messagebox.showwarning(message="Website Entry Empty!")
+
+
+# ---------------------------- PASSWORD GENERATOR ------------------------------ #
 def random_password():
     password = generate_password()
     password_entry.delete(0, tk.END)
@@ -68,9 +89,9 @@ password_label = tk.Label(text="Password:")
 password_label.grid(row=3, column=0)
 
 # Entries
-website_entry = tk.Entry(width=38)
+website_entry = tk.Entry(width=21)
 website_entry.focus()
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.grid(row=1, column=1)
 
 email_entry = tk.Entry(width=38)
 email_entry.insert(0, "agarcia00515@gmail.com")
@@ -80,6 +101,9 @@ password_entry = tk.Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Buttons
+search_button = tk.Button(text="Search", width=13, command=search_password)
+search_button.grid(row=1, column=2)
+
 generate_button = tk.Button(text="Generate Password", command=random_password)
 generate_button.grid(row=3, column=2)
 
